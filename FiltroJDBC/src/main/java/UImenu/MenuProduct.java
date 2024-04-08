@@ -9,12 +9,13 @@ import static UImenu.PrincipalMenu.startMenu;
 
 public class MenuProduct {
 
-
+//Metodo para iniciar el menu de productos
     public  static void showMenuProduct(){
 
         ProductoController respectiveController = new ProductoController();
         String opcionesMenu = " 1. Show All Products \n 2.Delete Products By Id. \n 3. Create Products. \n 4. Update Products . \n 5.Exit";
         int select = 0;
+        //Validaciones
         try {
             while (select <1 || select >5 ){
                 select = Integer.parseInt(JOptionPane.showInputDialog(null, opcionesMenu));
@@ -43,6 +44,7 @@ public class MenuProduct {
         }catch (Exception e){
             System.out.println((Integer) select);
             JOptionPane.showMessageDialog(null, "Only number characters are allowed" + e.getMessage());
+           //Menu recursivo en fallo
             startMenu();
         }
 

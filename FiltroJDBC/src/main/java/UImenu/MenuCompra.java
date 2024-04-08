@@ -1,19 +1,24 @@
 package UImenu;
 
-import Controllers.ClienteController;
+
 import Controllers.CompraController;
 
 import javax.swing.*;
 
 import static UImenu.PrincipalMenu.startMenu;
 
+
+
 public class MenuCompra {
 
+    //Menu para mostrar compras
     public  static void showMenuCompra(){
 
         CompraController respectiveController = new CompraController();
-        String opcionesMenu = " 1. Show All Clientss \n 2.Delete Client By Id. \n 3. Create Client. \n 4. Update Client . \n 5.Exit";
+        String opcionesMenu = " 1. Show All Boughts \n 2.Delete Bought By Id. \n 3. Register Bought. \n 4. Update Bought . \n 5.Exit";
         int select = 0;
+
+        //validacion de tipo y valor
         try {
             while (select <1 || select >5 ){
                 select = Integer.parseInt(JOptionPane.showInputDialog(null, opcionesMenu));
@@ -42,6 +47,7 @@ public class MenuCompra {
         }catch (Exception e){
             System.out.println((Integer) select);
             JOptionPane.showMessageDialog(null, "Only number characters are allowed" + e.getMessage());
+           //Menu recursivo en caso de fallo
             startMenu();
         }
 

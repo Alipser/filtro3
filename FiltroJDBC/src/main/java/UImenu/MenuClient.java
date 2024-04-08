@@ -6,10 +6,13 @@ import javax.swing.*;
 import static UImenu.PrincipalMenu.*;
 
 public class MenuClient {
+
+    //Metodo para mostrar el menu de los clientes
     public  static void showMenuClient(){
 
         ClienteController respectiveController = new ClienteController();
         String opcionesMenu = " 1. Show All Clientss \n 2.Delete Client By Id. \n 3. Create Client. \n 4. Update Client . \n 5.Exit";
+        //Seleccion y validacion de opciones
         int select = 0;
         try {
             while (select <1 || select >5 ){
@@ -39,6 +42,7 @@ public class MenuClient {
         }catch (Exception e){
             System.out.println((Integer) select);
             JOptionPane.showMessageDialog(null, "Only number characters are allowed" + e.getMessage());
+            //menu recursivo en fallo
             startMenu();
         }
 

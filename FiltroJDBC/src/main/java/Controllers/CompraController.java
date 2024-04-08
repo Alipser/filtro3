@@ -24,8 +24,12 @@ public class CompraController{
     ProductoModel productoModel = new ProductoModel();
     CompraModel respectiveModel = new CompraModel();
 
+
+    //INSTANCIA DE OBJETO CONTROLADOR GENERICO APORTA GETALL GETONE BY ID Y DELETE
     Generic<CompraModel, Compra>  generico =  new Generic<>(respectiveModel);
 
+
+    //ESTOS METODOS UTILIZAN EL Generico para crear los metodos comuners  GETALL GETONE BY ID Y DELETE
     public void getAll(){
         generico.getAll();
     }
@@ -104,18 +108,22 @@ public class CompraController{
     }
 
     public void update(){
+
+
+        //Se consiguen todas las compras existentes (TODAS LAS COMPRAS ESTAN ADJUDICADAS A UNA TIENDA)
         this.getAll();
-        int id = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter ID to find"));
+        int id = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter Bought ID"));
         Compra gettedObj = respectiveModel.getOne(id);
 
-
+        //Se consiguen todas las Clientes para seleccionar uno al cual se le va a hacer cambio de dueño a la compra
         clienteController.getAll();
         int idCliente = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter Cliente Id"));
         Cliente gettedClient = clienteModel.getOne(idCliente);
 
+        //Consigo el producto de la compra
         Producto gettedProduct =  productoModel.getOne(gettedObj.getIdProducto());
 
-
+        //CREO Y SETEO EL PANEL PARA MOSTRAR LOS CAMPOS DE UPDATE
         JPanel panel = new JPanel(new GridLayout(5, 1)); // 5 filas y 1 columna
         JTextField cliente = new JTextField();
         JTextField producto = new JTextField();
@@ -144,13 +152,14 @@ public class CompraController{
         gettedObj.getFechaCompra().toString();
         fecha.setText(gettedObj.getFechaCompra().toString());
 
-        int result = JOptionPane.showConfirmDialog(null, panel, "Enter Airplane's Data", JOptionPane.OK_CANCEL_OPTION);
+        int result = JOptionPane.showConfirmDialog(null, panel, "Enter Boughts's Data", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
             String clienteString = cliente.getText();
             String productoString = producto.getText();;
             String tiendaString = tienda.getText();
             String cantidadString = cantidad.getText();
             String fechaString = fecha.getText();
+           //creo un objeto para validar informatos e inyectarlo en la bd con el metodo correspondiente del modelo
             Compra objCreado = new Compra( Integer.parseInt(clienteString), Integer.parseInt(productoString) , LocalDate.parse(fechaString), Integer.parseInt(cantidadString), gettedObj.getIdCompra());
             respectiveModel.updateOne(objCreado);
             JOptionPane.showMessageDialog(null, "Inserted Correctly");
